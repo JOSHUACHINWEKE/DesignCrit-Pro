@@ -1,0 +1,23 @@
+.progress{display:flex;gap:8px;overflow:auto;padding:6px 0 14px;scrollbar-width:none}.progress::-webkit-scrollbar{display:none}.progress span{flex:1;min-width:120px;text-align:center;padding:9px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:.76rem;white-space:nowrap;background:rgba(255,255,255,.02);transition:.25s}.progress span.active{color:#111;background:var(--accent);border-color:var(--accent);font-weight:800}.stage{display:none;animation:rise .45s both}.stage.active{display:block}.research-info,.study-instructions,.review-confirmation{margin-top:18px;padding:18px;border:1px solid var(--border);background:rgba(255,255,255,.025);border-radius:16px}.research-info h3,.study-instructions h3,.review-confirmation h3{margin-top:0}.research-info li,.study-instructions p{color:var(--muted)}.consent-box,.review-confirmation label{display:flex;gap:10px;align-items:flex-start;margin-top:16px;padding:13px;border-radius:13px;background:rgba(200,241,53,.045);border:1px solid rgba(200,241,53,.12);cursor:pointer}.consent-box input,.review-confirmation input{width:auto;margin-top:5px;accent-color:var(--accent)}.stage input[type=file]{padding:12px;background:#0b0b12}.question-card{background:rgba(255,255,255,.018);border:1px solid var(--border);border-radius:16px;padding:16px}.comparison-card{position:relative;overflow:hidden}.comparison-card .bar{height:5px;border-radius:999px;background:rgba(255,255,255,.08);margin-top:12px;overflow:hidden}.comparison-card .bar span{display:block;height:100%;background:var(--accent);border-radius:inherit}.research-note{font-size:.8rem;color:var(--muted)}@media(max-width:760px){.progress span{min-width:92px}.research-info,.study-instructions,.review-confirmation{padding:15px}.question-card{padding:14px}}
+
+
+/* Research navigation improvements */
+.research-nav-actions { display:flex; align-items:center; gap:12px; }
+.compact-button { padding:7px 11px; font-size:.78rem; }
+.stage-back {
+  margin-bottom: 10px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: .84rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+.stage-back:hover { color: var(--accent); }
+.completion-actions { display:flex; gap:10px; margin-top:22px; }
+@media(max-width:600px) {
+  .research-nav-actions { width:100%; justify-content:space-between; }
+  .completion-actions .btn { width:100%; }
+}

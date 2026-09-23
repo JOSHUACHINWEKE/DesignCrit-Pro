@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#07070c">
+  <title>DesignCrit Pro · Research Dashboard</title>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
+  <div class="page-loader" id="pageLoader" aria-live="polite">
+    <div class="page-loader-mark">✦</div>
+    <strong>DesignCrit Pro</strong>
+    <span>Checking researcher access...</span>
+  </div>
+
+  <div class="shell dashboard-shell">
+    <nav class="nav">
+      <a class="brand" href="/">Design<span>Crit</span> Pro</a>
+      <div class="nav-links">
+        <a class="nav-link" href="/">Home</a>
+        <a class="nav-link research-nav-button" href="/research">Research Study</a>
+        <span class="nav-link dashboard-active">Dashboard</span>
+        <button class="nav-link profile-nav-button" id="dashboardLogout" type="button">Log Out</button>
+      </div>
+    </nav>
+
+    <section class="dashboard-hero reveal">
+      <div>
+        <span class="kicker">Private researcher area</span>
+        <h1>Research <span>Dashboard</span></h1>
+        <p>Welcome, <strong id="researcherName">Researcher</strong>. Monitor study progress, compare design improvements and export the anonymised research dataset.</p>
+      </div>
+      <button id="exportCsv" class="btn" type="button">Export CSV ↓</button>
+    </section>
+
+    <div id="stats" class="stats-grid"></div>
+
+    <section class="panel dashboard-panel">
+      <div class="section-heading">
+        <div><span class="kicker">Participant data</span><h2>Research sessions</h2></div>
+        <span class="step-pill">Researcher only</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Participant</th><th>Status</th><th>Experience</th><th>Design</th>
+            <th>Pre</th><th>Post</th><th>Gain</th><th>Colour</th><th>Type</th><th>Layout</th><th>Access.</th>
+          </tr></thead>
+          <tbody id="participantRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script type="module" src="/js/dashboard.js"></script>
+</body>
+</html>

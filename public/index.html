@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0a0a10">
+  <title>DesignCrit Pro</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  <!-- GLOBAL PAGE LOADER -->
+  <div class="page-loader" id="pageLoader" aria-live="polite" aria-label="Loading DesignCrit Pro">
+    <div class="page-loader-mark">✦</div>
+    <strong>DesignCrit Pro</strong>
+    <span>Preparing your workspace...</span>
+  </div>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <div class="shell">
+    <nav class="nav">
+      <a class="brand" href="/">Design<span>Crit</span> Pro</a>
+      <div class="nav-links">
+        <a class="nav-link" href="#home">Home</a>
+        <a class="nav-link research-nav-button" href="/research">Research Study</a>
+        <a class="nav-link dashboard-nav-link hidden" id="dashboardNavLink" href="/dashboard">Dashboard</a>
+        <a class="nav-link" href="#how-it-works">How It Works</a>
+        <button class="nav-link profile-nav-button" id="profileButton" type="button">Profile</button>
+      </div>
+    </nav>
+
+    <main id="home">
+      <section class="hero hero-app reveal">
+        <div class="eyebrow"><span class="pulse-dot"></span> AI-powered design feedback</div>
+        <h1>Turn your design into a <span>learning opportunity.</span></h1>
+        <p>Upload a design and receive structured, beginner-friendly feedback on colour, typography, layout and accessibility.</p>
+      </section>
+
+      <form id="analysis-form" class="panel glass-panel analysis-panel reveal reveal-delay-1">
+        <div class="section-heading">
+          <div>
+            <span class="kicker">01 / Setup</span>
+            <h2>Tell us about the design</h2>
+          </div>
+          <span class="step-pill">Ready when you are</span>
+        </div>
+
+        <div class="grid-3">
+          <div class="field">
+            <label for="designType">Design type</label>
+            <select id="designType">
+              <option value="general">General</option>
+              <option value="poster">Poster / Flyer</option>
+              <option value="social">Social Media</option>
+              <option value="ui">UI / Web</option>
+              <option value="logo">Logo</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="targetAudience">Target audience</label>
+            <select id="targetAudience">
+              <option value="general">General public</option>
+              <option value="professionals">Professionals</option>
+              <option value="youth">Youth / Gen Z</option>
+              <option value="creatives">Creatives</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="feedbackDepth">Feedback depth</label>
+            <select id="feedbackDepth">
+              <option value="beginner">Beginner</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="upload-zone" id="uploadZone">
+          <input id="design" type="file" accept="image/png,image/jpeg,image/webp" required hidden>
+          <div class="upload-icon">↥</div>
+          <h3>Drop your design here</h3>
+          <p>or choose an image from your device</p>
+          <button type="button" class="btn-secondary" id="chooseFile">Choose design</button>
+          <div id="fileMeta" class="file-meta hidden"></div>
+        </div>
+
+        <div class="action-row">
+          <button class="btn btn-large" type="submit" id="analyzeButton">Analyze Design <span>→</span></button>
+          <p id="status" class="status-message" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <section id="results" class="results-shell"></section>
+
+      <section class="panel how-it-works-section reveal" id="how-it-works">
+        <div class="section-heading">
+          <div>
+            <span class="kicker">How it works</span>
+            <h2>From upload to improvement in four steps</h2>
+          </div>
+          <span class="step-pill">Simple by design</span>
+        </div>
+        <div class="how-grid">
+          <article class="how-card"><span>01</span><h3>Upload</h3><p>Add your design and tell DesignCrit Pro what you are creating.</p></article>
+          <article class="how-card"><span>02</span><h3>Understand</h3><p>Receive structured feedback on colour, typography, layout and accessibility.</p></article>
+          <article class="how-card"><span>03</span><h3>Improve</h3><p>Apply the recommendations to strengthen the same design.</p></article>
+          <article class="how-card"><span>04</span><h3>Compare</h3><p>Research participants can compare pre-test and post-test results and reflect on their progress.</p></article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">DesignCrit Pro · Research prototype</footer>
+  </div>
+  <!-- FIRST VISIT WELCOME TOUR -->
+<div class="tour-overlay hidden" id="welcomeTour">
+  <div class="tour-card">
+
+    <button class="tour-skip" id="tourSkip" type="button">
+      Skip
+    </button>
+
+    <div class="tour-visual" id="tourVisual">
+      <div class="tour-icon" id="tourIcon">✦</div>
+    </div>
+
+    <div class="tour-content">
+      <span class="tour-step-label" id="tourStepLabel">
+        WELCOME
+      </span>
+
+      <h2 id="tourTitle">
+        Meet DesignCrit Pro
+      </h2>
+
+      <p id="tourDescription">
+        Your AI-powered design learning companion.
+      </p>
+
+      <div class="tour-progress">
+        <span class="tour-dot active"></span>
+        <span class="tour-dot"></span>
+        <span class="tour-dot"></span>
+        <span class="tour-dot"></span>
+      </div>
+
+      <div class="tour-actions">
+        <button
+          class="tour-back hidden"
+          id="tourBack"
+          type="button"
+        >
+          ← Back
+        </button>
+
+        <button
+          class="btn tour-next"
+          id="tourNext"
+          type="button"
+        >
+          Next →
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- AUTHENTICATION MODAL -->
+<div class="auth-overlay hidden" id="authModal">
+
+  <div class="auth-card">
+
+    <button
+      class="auth-close"
+      id="authClose"
+      type="button"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+    <div class="auth-brand">
+      <div class="auth-logo">✦</div>
+
+      <div>
+        <strong>DesignCrit Pro</strong>
+        <span>Design. Learn. Improve.</span>
+      </div>
+    </div>
+
+    <div class="auth-heading">
+      <span class="auth-label">GET STARTED</span>
+
+      <h2 id="authTitle">
+        Create your account
+      </h2>
+
+      <p id="authSubtitle">
+        Join the research study and start improving your designs
+        with structured AI feedback.
+      </p>
+    </div>
+
+    <!-- SIGN UP FORM -->
+    <form class="auth-form" id="signupForm">
+
+      <div class="auth-field">
+        <label for="signupName">Full name</label>
+
+        <input
+          type="text"
+          id="signupName"
+          placeholder="Enter your full name"
+          autocomplete="name"
+          required
+        >
+      </div>
+
+      <div class="auth-field">
+        <label for="signupEmail">Email address</label>
+
+        <input
+          type="email"
+          id="signupEmail"
+          placeholder="you@example.com"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="auth-field">
+        <label for="signupPassword">Password</label>
+
+        <div class="password-field">
+          <input
+            type="password"
+            id="signupPassword"
+            placeholder="Create a password"
+            autocomplete="new-password"
+            minlength="6"
+            required
+          >
+
+          <button
+            class="password-toggle"
+            type="button"
+            data-password-target="signupPassword"
+          >
+            Show
+          </button>
+        </div>
+      </div>
+
+      <button
+        class="btn auth-submit"
+        type="submit"
+      >
+        Create Account →
+      </button>
+
+      <div class="auth-divider">
+  <span></span>
+  <p>or continue with</p>
+  <span></span>
+</div>
+
+<button
+  class="google-auth-btn"
+  id="googleSignupButton"
+  type="button"
+>
+  <span class="google-icon">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        fill="#4285F4"
+        d="M21.35 12.23c0-.71-.06-1.4-.18-2.07H12v3.91h5.24a4.48 4.48 0 0 1-1.94 2.94v2.44h3.14c1.84-1.69 2.91-4.18 2.91-7.22z"
+      />
+      <path
+        fill="#34A853"
+        d="M12 21.75c2.62 0 4.82-.87 6.43-2.35l-3.14-2.44c-.87.58-1.98.93-3.29.93-2.53 0-4.67-1.71-5.44-4.01H3.32v2.52A9.72 9.72 0 0 0 12 21.75z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M6.56 13.88A5.86 5.86 0 0 1 6.25 12c0-.65.11-1.28.31-1.88V7.6H3.32A9.75 9.75 0 0 0 2.25 12c0 1.57.38 3.06 1.07 4.4l3.24-2.52z"
+      />
+      <path
+        fill="#EA4335"
+        d="M12 6.11c1.43 0 2.71.49 3.72 1.45l2.78-2.78A9.34 9.34 0 0 0 12 2.25 9.72 9.72 0 0 0 3.32 7.6l3.24 2.52C7.33 7.82 9.47 6.11 12 6.11z"
+      />
+    </svg>
+  </span>
+
+  Continue with Google
+</button>
+
+    </form>
+
+
+    <!-- SIGN IN FORM -->
+    <form
+      class="auth-form hidden"
+      id="signinForm"
+    >
+
+      <div class="auth-field">
+        <label for="signinEmail">Email address</label>
+
+        <input
+          type="email"
+          id="signinEmail"
+          placeholder="you@example.com"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="auth-field">
+        <div class="auth-label-row">
+          <label for="signinPassword">
+            Password
+          </label>
+
+          <button
+            class="auth-text-button"
+            type="button"
+            id="forgotPassword"
+          >
+            Forgot password?
+          </button>
+        </div>
+
+        <div class="password-field">
+          <input
+            type="password"
+            id="signinPassword"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            required
+          >
+
+          <button
+            class="password-toggle"
+            type="button"
+            data-password-target="signinPassword"
+          >
+            Show
+          </button>
+        </div>
+      </div>
+
+      <button
+        class="btn auth-submit"
+        type="submit"
+      >
+        Sign In →
+      </button>
+
+      <div class="auth-divider">
+  <span></span>
+  <p>or continue with</p>
+  <span></span>
+</div>
+
+<button
+  class="google-auth-btn"
+  id="googleSigninButton"
+  type="button"
+>
+  <span class="google-icon">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="#4285F4" d="M21.35 12.23c0-.71-.06-1.4-.18-2.07H12v3.91h5.24a4.48 4.48 0 0 1-1.94 2.94v2.44h3.14c1.84-1.69 2.91-4.18 2.91-7.22z"/>
+      <path fill="#34A853" d="M12 21.75c2.62 0 4.82-.87 6.43-2.35l-3.14-2.44c-.87.58-1.98.93-3.29.93-2.53 0-4.67-1.71-5.44-4.01H3.32v2.52A9.72 9.72 0 0 0 12 21.75z"/>
+      <path fill="#FBBC05" d="M6.56 13.88A5.86 5.86 0 0 1 6.25 12c0-.65.11-1.28.31-1.88V7.6H3.32A9.75 9.75 0 0 0 2.25 12c0 1.57.38 3.06 1.07 4.4l3.24-2.52z"/>
+      <path fill="#EA4335" d="M12 6.11c1.43 0 2.71.49 3.72 1.45l2.78-2.78A9.34 9.34 0 0 0 12 2.25 9.72 9.72 0 0 0 3.32 7.6l3.24 2.52C7.33 7.82 9.47 6.11 12 6.11z"/>
+    </svg>
+  </span>
+
+  Continue with Google
+</button>
+
+    </form>
+
+
+    <div class="auth-switch">
+      <span id="authSwitchText">
+        Already have an account?
+      </span>
+
+      <button
+        type="button"
+        id="authSwitchButton"
+      >
+        Sign in
+      </button>
+    </div>
+
+    <div class="auth-research-note">
+      <span>🔒</span>
+
+      <p>
+        Creating an account does not automatically enroll you in
+        the research study. You will review the participant
+        information and provide consent before beginning.
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+  <!-- PROFILE MODAL -->
+  <div class="profile-overlay hidden" id="profileModal">
+    <div class="profile-card">
+      <button class="auth-close" id="profileClose" type="button" aria-label="Close profile">×</button>
+      <span class="kicker">Your account</span>
+      <div class="profile-avatar" id="profileAvatar">D</div>
+      <h2 id="profileName">DesignCrit User</h2>
+      <p class="muted" id="profileEmail">Signed in</p>
+      <span class="profile-role hidden" id="profileRole">Participant</span>
+      <div class="profile-actions">
+        <a class="btn" href="/research">Continue Research →</a>
+        <button class="btn-secondary" id="profileLogout" type="button">Log Out</button>
+      </div>
+      <p class="profile-note">Your research consent is handled separately from your DesignCrit Pro account.</p>
+    </div>
+  </div>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

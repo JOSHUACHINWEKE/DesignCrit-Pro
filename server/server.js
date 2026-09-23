@@ -1,0 +1,28 @@
+import express from "express";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+import analysisRoutes from "./routes/analysis.routes.js";
+import researchRoutes from "./routes/research.routes.js";
+import dashboardRoutes from "./routes/dashboard.routes.js";
+import authRoutes from "./routes/auth.routes.js";
+import errorHandler from "./middleware/errorHandler.js";
+
+dotenv.config();
+const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.set("trust proxy", 1);
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "../public")));
+app.use("/api/analysis", analysisRoutes);
+app.use("/api/research", researchRoutes);
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/auth", authRoutes);
+app.get("/api/health", (req, res) => res.json({ success: true, message: "DesignCrit Pro API is running" }));
+app.get("/research", (req, res) => res.sendFile(path.join(__dirname, "../public/research.html")));
+app.get("/dashboard", (req, res) => res.sendFile(path.join(__dirname, "../public/dashboard.html")));
+app.use(errorHandler);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`DesignCrit Pro running on http://localhost:${PORT}`));
