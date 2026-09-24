@@ -119,7 +119,7 @@ async function analyzeWithGemini({
         {
           provider: "gemini",
           model,
-          fallbackUsed: false,
+          fallbackUsed: true,
         }
       );
 
@@ -154,7 +154,7 @@ async function analyzeWithGroq({
 }) {
   if (!process.env.GROQ_API_KEY) {
     throw new Error(
-      "GROQ_API_KEY is missing, so the fallback AI is unavailable."
+      "GROQ_API_KEY is missing."
     );
   }
 
@@ -253,14 +253,14 @@ async function analyzeWithGroq({
       {
         provider: "groq",
         model,
-        fallbackUsed: true,
+        fallbackUsed: false,
       }
     );
 
   } catch (error) {
     if (error?.name === "AbortError") {
       throw new Error(
-        "Groq fallback timed out. Please try the analysis again."
+        "Groq timed out. Please try the analysis again."
       );
     }
 
@@ -284,34 +284,35 @@ export async function analyzeDesign({
     feedbackDepth,
   });
 
-  let geminiError = null;
+  let groqError = null;
 
-  try {
-    return await analyzeWithGemini({
-      imageBuffer,
-      mimeType,
-      prompt,
-    });
-
-  } catch (error) {
-    geminiError = error;
-
-    console.warn(
-      "Gemini could not complete the analysis. Switching to Groq fallback."
-    );
-  }
-
+  // Primary provider: Groq.
   try {
     return await analyzeWithGroq({
       imageBuffer,
       mimeType,
       prompt,
     });
+  } catch (error) {
+    groqError = error;
 
-  } catch (groqError) {
+    console.warn(
+      "Groq could not complete the analysis. Switching to Gemini fallback.",
+      error?.message || error
+    );
+  }
+
+  // Secondary provider: Gemini.
+  try {
+    return await analyzeWithGemini({
+      imageBuffer,
+      mimeType,
+      prompt,
+    });
+  } catch (geminiError) {
     console.error(
-      "Groq fallback also failed:",
-      groqError?.message || groqError
+      "Gemini fallback also failed:",
+      geminiError?.message || geminiError
     );
 
     const combinedError = new Error(
@@ -319,12 +320,12 @@ export async function analyzeDesign({
     );
 
     combinedError.cause = {
-      gemini:
-        geminiError?.message ||
-        "Gemini failed",
       groq:
         groqError?.message ||
         "Groq failed",
+      gemini:
+        geminiError?.message ||
+        "Gemini failed",
     };
 
     throw combinedError;
